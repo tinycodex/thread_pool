@@ -13,7 +13,7 @@ typedef struct {
     task t;
     pthread_mutex_t lock;
     int num;
-    pthread_t* tid;
+    pthread_t tid[0];
 } Pool;
 
 void pool_add(Pool* p, task t);

@@ -70,11 +70,10 @@ static void* dispatch(void *arg){
 
 Pool* pool_create(int num) {
     printf("mem bytes: %ld,%ld\n",num * sizeof(pthread_t),sizeof(Pool));
-    Pool* p= malloc( sizeof(Pool));
-
-    pthread_t* tid_s = malloc(num * sizeof(pthread_t));
-    p->tid = tid_s;
+    Pool* p= malloc( sizeof(Pool) + num * sizeof(pthread_t));
     p->num = num;
+
+    pthread_t* tid_s = p->tid;
 
     pthread_mutex_init(&p->lock, NULL);
     pthread_mutex_lock(&p->lock);
@@ -105,7 +104,6 @@ void pool_destroy(Pool* p){
     }
 
     pthread_mutex_destroy(&p->lock);
-    free(p->tid);
     free(p);
 }
 
