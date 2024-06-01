@@ -1,5 +1,4 @@
 CFLAGS += -pthread -g -Wall -Werror
-#LDFLAGS += -pthread
 
 
 run: thread_pool
